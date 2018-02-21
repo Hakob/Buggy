@@ -1,0 +1,229 @@
+input,
+select {
+  margin-bottom: .5rem;
+  padding: .5rem;
+  font-size: 1rem;
+  font-family: inherit;
+  background-color: $white;
+  color: $colorPrimary;
+  font-weight: 600;
+
+  &::placeholder,
+  ::-webkit-input-placeholder {
+    font-style: italic;
+    font-weight: 400;
+    color: $colorPrimaryTint;
+  }
+
+  &:focus {
+    box-shadow: none;
+    outline: none;
+    border-color: $inputBorderFocusColor;
+  }
+}
+
+input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: $white;
+  color: $colorActivePrimary;
+
+  &:focus {
+    outline: 0;
+  }
+
+  &[type="text"] {
+    min-height: 40px;
+  }
+
+  &[type="submit"] {
+    @include button;
+  }
+
+  &[type="checkbox"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    border: 0;
+
+    ~ label {
+
+      &:hover {
+        cursor: pointer;
+
+        &:before {
+          background-color: $colorPrimaryTint;
+        }
+      }
+
+      &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 2;
+        width: 16px;
+        height: 16px;
+        box-shadow: inset 0 0 0 2px $colorPrimary;
+        background-color: $colorBackground;
+        background-size: 8px;
+        background-repeat: no-repeat;
+        background-position: 4px 3px;
+        transition: background-color .2s ease;
+      }
+    }
+
+    &:checked ~ label:before {
+      z-index: 2;
+      background-color: $colorPrimary;
+      background-image: url('../img/check.svg');
+    }
+
+    &:hover:checked ~ label:before {
+      background-color: $linkHoverColor;
+      border-color: darken($linkHoverColor, 5%);
+    }
+
+    &:focus {
+      box-shadow: none;
+      outline: 0;
+    }
+  }
+
+  &[type="file"] {
+    padding: 0;
+    background-color: transparent;
+    font-family: $fontMonospace;
+    color: $colorPrimary;
+    font-size: .875rem;
+  }
+}
+
+select {
+  -webkit-appearance: none;
+  padding-right: 2rem;
+  min-height: 40px;
+  padding-right: 2rem;
+  min-height: 40px;
+}
+
+textarea {
+  font-family: $fontPrimary;
+  border: 2px solid $colorPrimary;
+  background: $white;
+  padding: 1rem;
+  color: $colorPrimary;
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+.formField {
+  margin-bottom: 1rem;
+}
+
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: .7rem;
+}
+
+fieldset {
+  padding-right: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+select,
+span.select2-container {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 100%;
+  margin-bottom: 1rem;
+  border-radius: 0;
+  font-size: 1rem;
+  font-family: $fontMonospace;
+  background-color: $white;
+  background-image: url('../img/chevron-down.svg');
+  background-position: calc(100% - 10px) 50%;
+  background-repeat: no-repeat;
+}\
+
+input,
+select,
+.select-2 {
+  width: 100%;
+  border: 2px solid $inputBorderColor;
+  background-color: $white;
+}
+
+.select2-container--default li.select2-results__option--highlighted[aria-selected] {
+  background-color: $colorPrimaryShade;
+}
+
+.select2-container--default .select2-results > .select2-results__options {
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  font-size: .925rem;
+  font-family: $fontPrimary;
+}
+
+// Select2-Specific Styles
+.select2-container--default {
+  max-width: 500px;
+}
+
+.select2-selection__rendered {
+  margin-top: 5px !important;
+  color: $colorPrimary !important;
+  background-image: url('../img/chevron-down.svg');
+  background-position: calc(100% - 10px) 50%;
+  background-repeat: no-repeat;
+}
+
+.select2-selection__choice {
+  max-width: calc(100% - 2.25rem);
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+}
+
+span.select2-container--default .select2-selection--multiple  {
+  border: 2px solid $colorPrimary;
+  border-radius: 0;
+
+  .select2-selection__choice {
+    background-color: transparentize($colorPrimary, .9);
+
+    .select2-selection__choice__remove {
+      color: $colorPrimary;
+    }
+  }
+}
+
+
+.select2-container--default {
+    span.select2-selection--multiple,
+    span.select2-selection--single {
+    border-radius: 0;
+    border-width: 2px;
+    min-height: 40px;
+    border-color: $inputBorderColor;
+    background-color: $white;
+
+    .select2-selection__choice {
+      border-radius: 0;
+      border: 0;
+    }
+
+    .select2-selection__arrow {
+      display: none;
+    }
+  }
+
+  &.select2-container--focus span.select2-selection--multiple {
+    border-width: 2px;
+    border-color: $inputBorderFocusColor;
+  }
+}

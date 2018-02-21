@@ -1,0 +1,50 @@
+header {
+  @include inner;
+  margin-bottom: 2.6rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+nav {
+  display: flex;
+  width: 100%;
+  align-items: baseline;
+  padding-top: 2.25rem;
+  position: relative;
+}
+
+.navLoginState {
+  position: absolute;
+  right: 0;
+  top: .7rem;
+  text-align: right;
+}
+
+.logoutLink {
+  font-weight: 600;
+}
+
+.greeting {
+  padding-top: .5rem;
+  padding-bottom: 0;
+  font-size: .875rem;
+}
+
+a.logo {
+  font-family: $fontPrimary;
+  font-weight: 900;
+  font-size: 2.4rem;
+  color: currentColor;
+  margin-right: auto;
+  box-shadow: none;
+  text-shadow: none;
+
+  &:hover {
+    color: lighten($colorPrimary, 20%);
+  }
+}
+
+a.newBugButton {
+  margin-left: auto;
+  text-align: left;
+}

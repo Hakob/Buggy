@@ -1,0 +1,19 @@
+Django>=1.11,<1.12
+django-enumfields
+django-authtools
+dj-database-url
+psycopg2
+django-debug-toolbar
+django-dotenv
+markdown
+babel
+django-extensions
+django-compressor
+django-pyscss
+pytest
+pytest-django
+# https://github.com/mariocesar/sorl-thumbnail/issues/458
+-e git+git://github.com/mariocesar/sorl-thumbnail@v12.3#egg=sorl-thumbnail
+pillow
+django-argonauts
+bleach

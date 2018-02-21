@@ -1,0 +1,23 @@
+@keyframes glyph {
+  0% {
+    content: '\25A7';
+    transform: scale(.75);
+  }
+
+  25% {
+    content: '\25A6';
+  }
+
+  50% {
+    content: '\25A8';
+    transform: scale(1);
+  }
+
+  75% {
+    content: '\25A5';
+  }
+
+  100% {
+    content: '\25A4';
+  }
+}

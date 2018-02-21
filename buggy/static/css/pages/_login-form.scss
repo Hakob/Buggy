@@ -1,0 +1,31 @@
+.loginForm {
+  max-width: 32rem;
+  margin: 6rem auto 2rem auto;
+
+  > h1 {
+    @include topStroke;
+    padding-top: 2rem;
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+  }
+
+  > p {
+    margin-top: 1rem;
+    font-size: 2rem;
+    font-weight: 300;
+  }
+
+  input[type="submit"] {
+    cursor: pointer;
+    transition: color .2s ease, border-color .2s ease;
+    max-width: 200px;
+    display: block;
+    float: right;
+  }
+
+  .forgotPassword {
+    display: inline-block;
+    margin-bottom: 2rem;
+    margin-top: .3rem;
+  }
+}

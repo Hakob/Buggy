@@ -1,0 +1,529 @@
+.bugListTable {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+  margin-bottom: 4rem;
+
+  tr.checked td {
+    background-color: transparentize($eggplant, .8);
+
+    span {
+      transition: background-color .2s ease;
+    }
+
+    a {
+      box-shadow: none;
+      text-shadow: none;
+    }
+  }
+
+  td,
+  th {
+    padding: .75rem .5rem .5rem .25rem;
+    font-size: .925rem;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+  }
+
+  td {
+    border-bottom: 2px solid transparentize($colorPrimary, .95);
+  }
+
+  th {
+    border-bottom: 3px solid $colorPrimaryTint;
+    border-top: 3px solid $colorPrimaryTint;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    vertical-align: bottom;
+    font-weight: 600;
+
+    @include large {
+      white-space: nowrap;
+    }
+
+    a {
+      font-family: $fontPrimary;
+      font-weight: 600;
+      box-shadow: none;
+      position: relative;
+
+      &.active {
+        color: $colorPrimaryTint;
+      }
+
+      &.active:before {
+        display: inline-block;
+        content: url('../img/chevron-down.svg');
+        position: relative;
+        margin-left: -.25rem;
+        vertical-align: baseline;
+        transform: rotate(180deg);
+      }
+
+      &.active.desc:before {
+        transform: rotate(0);
+      }
+    }
+  }
+
+  tbody tr:first-of-type td {
+    // Additional offset from header on first row
+    padding-top: 1.25rem;
+  }
+}
+
+.filterSectionTitle {
+  grid-column: 1 / 4;
+}
+
+.filterList {
+  list-style: none;
+  padding-left: 0;
+}
+
+
+// Bug list wrapper
+#pjax-container {
+  position: relative;
+  top: 0;
+
+  &.loading {
+    height: 100px;
+
+    &:after {
+      content: 'loading...';
+      position: absolute;
+      font-weight: 700;
+      letter-spacing: 4px;
+      width: 100%;
+      text-align: center;
+      padding-left: 2rem;
+      bottom: -3.5rem;
+      text-transform: uppercase;
+      font-family: $fontMonospace;
+    }
+
+    &:before {
+      display: block;
+      content: '';
+      position: absolute;
+      bottom: -3.8rem;
+      left: calc(50% - 4.5rem);
+      font-size: 1.25rem;
+      animation-name: glyph;
+      animation-iteration-count: infinite;
+      animation-duration: .5s;
+    }
+
+    td {
+      opacity: 0;
+      border-bottom-color: transparent;
+    }
+  }
+}
+
+// Preset List Styles
+.presetContainer {
+  @include topStroke;
+  padding: 0;
+
+  h2 {
+    font-weight: 600;
+    margin-bottom: 0;
+  }
+
+  ul {
+    list-style: none;
+
+    a {
+      font-weight: 400;
+    }
+  }
+}
+
+.presetFilterList {
+  list-style: none;
+  padding-left: 0;
+  margin-top: .7rem;
+  margin-bottom: 1.5rem;
+
+  li {
+    position: relative;
+    margin-bottom: .5rem;
+    line-height: 1;
+
+    a {
+      font-weight: 600;
+      box-shadow: none;
+      text-shadow: none;
+    }
+
+    &.presetLocked a {
+      padding-left: 0;
+    }
+  }
+}
+
+.presetItem {
+  position: relative;
+  font-size: 1rem;
+  margin-right: 0;
+  display: flex;
+
+  &.presetLocked {
+    padding-left: 0;
+  }
+
+  form {
+    margin-left: .2rem;
+    margin-right: .6rem;
+
+    label {
+      text-transform: uppercase;
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      margin-bottom: 0;
+
+      input[type="submit"] {
+        border: 0;
+        position: absolute;
+        left: 0;
+        cursor: pointer;
+        padding: .2rem;
+        line-height: 1;
+        background-color: transparent;
+      }
+
+      &:hover {
+        color: $colorPrimaryTint;
+      }
+    }
+  }
+}
+
+.add-preset {
+  @include topStroke(2px);
+  font-size: 1rem;
+  padding-top: .6rem;
+
+  label {
+    // Todo: actually remove this from the DOM
+    display: none;
+  }
+}
+
+.addPresetActions {
+  display: flex;
+
+  .formField {
+    margin-bottom: 0;
+  }
+
+  input {
+    height: 3.2rem;
+    margin-bottom: 0;
+    border-radius: 0;
+  }
+
+  input[type='submit'] {
+    font-size: 1.2rem;
+    line-height: 1;
+    font-weight: 300;
+    align-self: flex-end;
+    background-color: $colorPrimary;
+    color: $colorBackground;
+    border: 2px solid $colorPrimary;
+    border-left: 0;
+    margin-left: 0rem;
+    flex-basis: 30px;
+
+    &:hover {
+      background-color: $linkHoverColor;
+    }
+  }
+}
+
+.bugListCheck {
+  position: relative;
+
+  th&,
+  td& {
+    overflow: visible;
+    width: 34px;
+
+    input {
+      left: 1rem;
+    }
+
+    label {
+      &:before {
+        left: .5rem;
+      }
+    }
+  }
+
+  th& {
+    input {
+      top: 1.25rem;
+    }
+
+    label {
+      position: absolute;
+      top: 1rem;
+
+      &:before {
+        top: 0;
+        left: .3rem;
+        width: 15px;
+        height: 15px;
+      }
+
+      &:after {
+        content: attr(data-label);
+        position: absolute;
+        opacity: 0;
+      }
+    }
+  }
+
+  tr:first-of-type td& label:before {
+    top: 1.25rem;
+  }
+
+  td& {
+    position: relative;
+    label {
+
+      &:before {
+        top: .7rem;
+      }
+
+      &:after {
+        content: attr(data-label);
+        position: absolute;
+        opacity: 0;
+      }
+    }
+  }
+}
+
+
+// Bug Table Cells
+.bugListNumber {
+  th& {
+    min-width: 80px;
+    width: 80px;
+  }
+
+  td& {
+    letter-spacing: .4px;
+  }
+}
+
+.bugListState,
+.bugListPriority {
+  td& {
+    text-transform: uppercase;
+    font-size: 75%;
+    letter-spacing: .04rem;
+    font-weight: 600;
+
+    span {
+      min-height: 34px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid currentColor;
+      width: 100%;
+      text-align: center;
+      padding: 4px 4px 2px 4px;
+      line-height: 1.2;
+    }
+  }
+}
+
+.bugListState {
+  th& {
+    width: 115px;
+  }
+}
+
+.bugListPriority {
+  th& {
+    width: 110px;
+  }
+}
+
+.bugListProject {
+  th& {
+    width: 160px;
+  }
+
+  td& {
+  }
+}
+
+.bugListBug {
+  th& {
+    width: 20%;
+  }
+  td& {
+    a {
+      font-size: .875rem;    }
+  }
+}
+
+.bugListCreator {
+  width: 80px;
+}
+
+.bugListLastModified {
+  td& {
+    time {
+      text-transform: none;
+      font-family: $fontPrimary;
+    }
+  }
+}
+
+.bugListAssignedTo,
+.bugListCreator {
+
+  th& {
+    width: 108px;
+  }
+}
+
+.bugListPriority {
+
+  .priority-1 & {
+    span {
+      background-color: transparentize($successColor, .15);
+      color: $colorBackground;
+      border-color: darken($successColor, 10%);
+
+      &:before {
+        background-image: url('../img/infinity.svg');
+        content: '';
+        background-size: contain;
+        background-repeat: no-repeat;
+        display: inline-block;
+        width: 12px;
+        height: 9px;
+        position: relative;
+        bottom: 0;
+        margin-right: 4px;
+      }
+    }
+  }
+
+  .priority-3 & {
+    span {
+      color: $colorBackground;
+      background-color: $errorColor;
+      border-color: darken($errorColor, 15%);
+
+      &:before {
+        background-image: url('../img/alert.svg');
+        content: '';
+        background-size: contain;
+        background-repeat: no-repeat;
+        display: inline-block;
+        width: 9px;
+        height: 9px;
+        position: relative;
+        bottom: 2px;
+        margin-right: 4px;
+      }
+    }
+  }
+}
+
+.bugListCount {
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+  text-align: center;
+  position: relative;
+
+  span {
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: $fontMonospace;
+    font-size: 1rem;
+    padding: .2rem 1rem;
+    border: 2px solid currentColor;
+    color: $colorPrimary;
+    position: relative;
+  }
+}
+
+
+// Bug List Filters
+.bugFilterGroup {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-column-gap: 2rem;
+
+  &__wrap {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    grid-column-gap: 2rem;
+  }
+
+  &__section {
+    padding-left: 0;
+    padding-top: 1rem;
+    border: 0;
+    @include topStroke;
+
+    label {
+      margin-bottom: .2rem;
+      position: relative;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+  }
+
+  .formField {
+    margin-bottom: 1rem;
+
+    &.state,
+    &.priority {
+      input {
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+
+      li {
+        line-height: 1.1;
+        position: relative;
+        margin-bottom: 1.1rem;
+
+        label {
+          cursor: pointer;
+          color: $colorPrimary;
+          text-transform: uppercase;
+          font-weight: 600;
+          padding-left: 1.6rem;
+
+          &:hover {
+            color: $linkHoverColor;
+          }
+        }
+      }
+    }
+  }
+}
+
+.bugFilterButton {
+  margin-bottom: auto;
+  margin-top: 2rem;
+  color: $blue;
+  background-color: transparent;
+}

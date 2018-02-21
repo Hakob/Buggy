@@ -1,0 +1,83 @@
+{% extends "buggy/base.html" %}
+
+{% load buggy_tags thumbnail argonauts absoluteuri %}
+
+{% block title %}{{ block.super }} - {{ bug.title }}{% endblock %}
+
+{% block content %}
+
+<script type="application/json" id="buggyData-harvestPlatformConfig">
+  {
+    "applicationName": "Buggy",
+    "permalink": {{ bug.get_absolute_url|absolutize|json }}
+  }
+</script>
+<script async src="https://platform.harvestapp.com/assets/platform.js"></script>
+<section class="bugMetadata">
+  <h2>
+    <div class="harvest-timer"
+      data-item='{"id": {{ bug.number|json|force_escape }}, "name": {{ bug.title|json|force_escape }}}'
+      data-group='{"id": {{ bug.project.id|json|force_escape }}, "name": {{ bug.project.name|json|force_escape }}}'
+    ></div>
+    <span class="bugNumber">#{{ bug.number }}</span> /
+    <a class="bugDetailProject" href="{{ bug.project.get_absolute_url }}">
+      {{ bug.project }}
+    </a>
+  </h2>
+  <h1 class="bugMetadataTitle">
+    {{ bug.title }}
+  </h1>
+</section>
+
+<p class="bugDetailCurrentState">
+  <span>
+  Created by <strong>@{{ bug.created_by.get_short_name }}</strong> {{ bug.created_at|relativedate }},
+  state is <strong class="bugStateInline">{{ bug.state }}</strong>{% if bug.assigned_to %}<br> Currently
+  assigned to <strong>@{{ bug.assigned_to.get_short_name }}</strong>{% endif %}
+  with priority <strong class="bugStateInline">{{ bug.priority.label }}</strong>.
+  </span>
+</p>
+
+{% for action in bug.actions_preloaded %}
+
+  <section class="bugDetailAction" id="action-{{ action.order }}">
+    <h1><a href="#action-{{ action.order }}">{{ action.created_at|absolutedate }}</a></h1>
+    <p class="bugDetailActionDescription">{{ action.user.get_short_name }} {{ action.description }}</p>
+    {% if action.settitle and not forloop.first %}
+    <p class="bugTitleChange">
+      <span>
+        Title changed from
+        <strong>{{ action.settitle.previous_title }}</strong>
+        to
+        <strong>{{ action.settitle.title }}</strong>.
+      </span>
+    </p>
+    {% endif %}
+
+    {% if action.comment %}
+      {{ action.comment.html|safe }}
+    {% endif %}
+
+    {% if action.attachments.all %}
+      <section class="attachments">
+        <h3>Attachments</h3>
+        {% for attachment in action.attachments.all %}
+          <div class="attachment">
+            <a href="{{ attachment.file.url }}">
+              {% if attachment.is_image %}
+                {% thumbnail attachment.file "100x100" as im %}
+                  <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                {% endthumbnail %}
+              {% endif %}
+              {{ attachment.basename }}
+            </a>
+          </div>
+        {% endfor %}
+      </section>
+    {% endif %}
+  </section>
+{% endfor %}
+
+{% include "buggy/_bug_form.html" %}
+
+{% endblock %}

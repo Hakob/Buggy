@@ -1,0 +1,92 @@
+.bugForm {
+  @include inset;
+  padding: 2rem;
+  max-width: 64rem;
+}
+
+#id_project,
+.bugForm .title {
+  max-width: 32rem;
+}
+
+.bugFormActionBar {
+  display: flex;
+
+  input {
+    border: 0;
+  }
+
+  .formField {
+    margin-right: 2rem;
+  }
+
+  input,
+  select {
+    flex: 1 1 auto;
+  }
+
+  .attachments,
+  .priority,
+  .assign_to {
+    @include topStroke($borderWidth: 4px);
+    padding-top: 1rem;
+    flex: 1 1 auto;
+  }
+
+  .assign_to {
+    margin-right: 0;
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+
+  button {
+    margin-right: 1rem;
+    font-size: .875rem;
+    min-height: 48px;
+
+    &.open, &.cancel {
+      margin-right: 0;
+    }
+
+    &[value='entrusted'] {
+      margin-right: 0;
+      margin-left: 1rem;
+    }
+  }
+}
+
+.subActions {
+  display: flex;
+}
+
+.commentMarkdown {
+  display: flex;
+  margin-bottom: 2rem;
+
+  textarea {
+    font-size: 1rem;
+    width: 100%;
+    resize: vertical;
+    border: 2px solid $colorPrimary;
+  }
+}
+
+.previewTarget {
+  font-size: 1.2rem;
+  background-color: rgba(0, 0, 0, .01);
+  color: rgba(0, 0, 0, .75);
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid currentColor;
+  margin-left: 2rem;
+  margin-top: 2rem;
+}
+
+.bugCommentEditor,
+.previewMarkdown {
+  flex: 1 0 50%;
+  height: 100%;
+}

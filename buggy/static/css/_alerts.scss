@@ -1,0 +1,97 @@
+// Error state styles
+.errorlist {
+  color: $white;
+  text-align: center;
+  margin-bottom: 3rem;
+
+  li {
+    background-color: $errorColor;
+    line-height: 1;
+  }
+}
+
+.errorlist,
+.messages {
+  list-style: none;
+  padding-left: 0;
+
+  li {
+    line-height: 1.25;
+    padding: 1rem 1.25rem 1rem 1rem;
+    font-weight: 400;
+    letter-spacing: .4px;
+    display: inline-block;
+    border-radius: 4px;
+
+    &:before {
+      height: 10px;
+      display: inline-block;
+      margin-right: .5rem;
+      vertical-align: -1px;
+    }
+  }
+
+  .warning,
+  .error,
+  .success {
+    color: $white;
+    font-weight: 300;
+    font-size: 1.1rem;
+  }
+
+  .error {
+    background-color: $errorColor;
+    border-bottom: 4px solid darken($errorColor, 5%);
+
+    &:before {
+      content: url('../img/delete-reverse.svg');
+    }
+  }
+
+  .warning {
+    background-color: $warningColor;
+    border-bottom: 4px solid darken($warningColor, 5%);
+
+    &:before {
+      content: url('../img/alert.svg');
+    }
+  }
+
+  .success {
+    background-color: $successColor;
+    border-bottom: 4px solid darken($successColor, 5%);
+
+    &:before {
+      content: url('../img/check.svg');
+    }
+  }
+}
+
+.errorlist {
+  max-width: 34rem;
+  margin-left: auto;
+  margin-right: auto;
+
+  li {
+    border-bottom: 4px solid darken($errorColor, 5%);
+
+    &:before {
+      display: inline-block;
+      margin-right: .4rem;
+      vertical-align: -2px;
+      content: url('../img/delete-reverse.svg');
+    }
+  }
+}
+
+.messages {
+  text-align: center;
+  margin-bottom: 3rem;
+
+
+  li {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 34rem;
+  }
+}

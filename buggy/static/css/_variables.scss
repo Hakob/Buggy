@@ -1,0 +1,37 @@
+$white: #fff;
+$offWhite: #fffdf8;
+$offWhiteDark: #fefbf7;
+$offWhiteXDark: #f5f2eb;
+$greyLight: #9a9a9a;
+
+$insetBackground: #fbfbff;
+$insetBorder: #dfddff;
+$greyDark: #0d0f05;
+$greyXLight: #fafafa;
+$blueBright: #00f;
+$green: #00c593;
+$blue: #1e90ff;
+$purple: #4a4cac;
+$red: #f94141;
+$yellow: #e37a01;
+$magenta: #b34281;
+
+$eggplant: #4019c0;
+$global-width: 80rem;
+$errorColor: $red;
+$warningColor: $magenta;
+$successColor: $green;
+
+$gradientPurpleBright: linear-gradient(40deg, $eggplant 0%, #560BB0 95%);
+
+$fontPrimary: 'Work Sans', sans-serif;
+$fontMonospace: 'Roboto Mono', monospace;
+$colorPrimary: $eggplant;
+$colorPrimaryShade: darken($colorPrimary, 15%);
+$colorPrimaryTint:  lighten($colorPrimary, 25%);
+$colorBackground: $offWhite;
+$colorActivePrimary: $colorPrimaryTint;
+$fontMonospaceFontSize: 1.1rem;
+$inputBorderColor: $colorPrimary;
+$inputBorderFocusColor: $colorPrimaryTint;
+$linkHoverColor: $colorPrimaryTint;

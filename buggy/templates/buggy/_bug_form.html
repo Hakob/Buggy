@@ -1,0 +1,28 @@
+<form method="post" enctype="multipart/form-data" class="bugForm">
+  {{ form.non_field_errors }}
+
+  {% if form.project %}
+    {% include "buggy/_formfield.html" with field=form.project %}
+  {% endif %}
+  {% if form.title %}
+    {% include "buggy/_formfield.html" with field=form.title %}
+  {% endif %}
+
+  <div class="commentMarkdown">
+    <div class="bugCommentEditor">
+      {% include "buggy/_formfield.html" with field=form.comment %}
+      <button type="button" class="previewMarkdown" title="Preview markdown">Preview Comment</button>
+    </div>
+    <div class="previewTarget" hidden></div>
+  </div>
+
+  <div class="bugFormActionBar">
+    {% include "buggy/_formfield.html" with field=form.attachments %}
+    {% include "buggy/_formfield.html" with field=form.priority %}
+    {% include "buggy/_formfield.html" with field=form.assign_to %}
+  </div>
+
+  {% include 'buggy/_form_actions.html' %}
+
+  {% csrf_token %}
+</form>
