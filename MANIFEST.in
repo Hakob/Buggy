@@ -2,5 +2,5 @@ include README.md
 recursive-include buggy/static *
 recursive-include buggy/templates *
 recursive-include buggy_accounts/templates *
-prune testproj
+prune config
 global-exclude *.pyc[cod] __pycache__

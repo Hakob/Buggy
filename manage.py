@@ -6,7 +6,7 @@ import sys
 # dotenv.read_dotenv()
 
 if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "testproj.settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
     os.environ.setdefault('LC_TIME', "hy_AM")
     try:
         from django.core.management import execute_from_command_line

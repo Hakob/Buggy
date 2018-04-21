@@ -26,7 +26,7 @@ def get_bugs_from_commit_message(msg):
             fixes.add(match[1])
         else:
             mentions.add(match[1])
-    return (mentions, fixes)
+    return mentions, fixes
 
 
 def process_commit(commit):
