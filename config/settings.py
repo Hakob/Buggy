@@ -75,7 +75,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
-            "read_default_file": BASE_DIR + '\\my.cfg'
+            "read_default_file": BASE_DIR + '\\my.cnf'
         }
     }
 }
