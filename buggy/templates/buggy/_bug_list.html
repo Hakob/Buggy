@@ -19,9 +19,9 @@
             No.
           </a>
         </th>
-        <th class="bugListProject">
-          <a href="{{ sort_links.project }}" data-pjax{% if sort_by == 'project'%} class="active{% if sort_desc %} desc{% endif %}"{% endif %}>
-            Project
+        <th class="bugListCategory">
+          <a href="{{ sort_links.category }}" data-pjax{% if sort_by == 'category'%} class="active{% if sort_desc %} desc{% endif %}"{% endif %}>
+            Category
           </a>
         </th>
         <th class="bugListBug">
@@ -67,7 +67,7 @@
           <label for="bulk-select-checkbox-{{bug.id}}" data-label="Select {{ bug.number }}"></label>
         </td>
         <td class="bugListNumber">{{ bug.number }}</td>
-        <td class="bugListProject">{{ bug.project }}</td>
+        <td class="bugListCategory">{{ bug.category }}</td>
         <td class="bugListBug"><a href="{{ bug.get_absolute_url }}">{{ bug.title }}</a></td>
         <td class="bugListLastModified">{{ bug.modified_at|absolutedate }}</td>
         <td class="bugListCreator">{{ bug.created_by.get_short_name }}</td>

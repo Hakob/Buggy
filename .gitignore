@@ -11,7 +11,7 @@ db.sqlite3
 *.egg-info/
 venv/
 
-
+my.cnf
 
 ### Python template
 # Byte-compiled / optimized / DLL files

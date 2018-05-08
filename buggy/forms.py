@@ -4,7 +4,7 @@ import operator
 from django import forms
 from django.contrib.auth import get_user_model
 
-from .models import Project, PresetFilter
+from .models import Category, PresetFilter
 from .enums import State, Priority
 from .fields import MultipleFileField
 
@@ -16,9 +16,9 @@ class UnwrappedCheckboxSelectMultiple(forms.CheckboxSelectMultiple):
 
 
 class FilterForm(forms.Form):
-    projects = forms.ModelMultipleChoiceField(
+    categories = forms.ModelMultipleChoiceField(
         required=False,
-        queryset=Project.objects.filter(is_active=True),
+        queryset=Category.objects.filter(is_active=True),
     )
     search = forms.CharField(
         required=False,
@@ -68,8 +68,8 @@ class FilterForm(forms.Form):
 
     def filter(self, qs):
         cd = self.cleaned_data
-        if cd['projects']:
-            qs = qs.filter(project__in=cd['projects'])
+        if cd['categories']:
+            qs = qs.filter(category__in=cd['categories'])
         if cd['created_by']:
             qs = qs.filter(created_by=cd['created_by'])
         if cd['assigned_to']:
@@ -134,7 +134,7 @@ class EditForm(BugFormBase):
 
 class CreateForm(EditForm):
     comment = forms.CharField(widget=forms.Textarea)
-    project = forms.ModelChoiceField(queryset=Project.objects.filter(is_active=True))
+    category = forms.ModelChoiceField(queryset=Category.objects.filter(is_active=True))
 
 
 class BulkActionForm(BugFormBase):

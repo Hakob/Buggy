@@ -42,7 +42,7 @@ class BugNumberPattern(Pattern):
             self.extension.mentioned_bugs.add(bug)
             el = etree.Element('a', {
                 'href': bug.get_absolute_url(),
-                'title': '{} - {}'.format(bug.project, bug.title),
+                'title': '{} - {}'.format(bug.category, bug.title),
                 'class': 'bugLink',
             })
             el.text = '#{}'.format(match.group(3))

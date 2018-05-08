@@ -1,8 +1,8 @@
 <form method="post" enctype="multipart/form-data" class="bugForm">
   {{ form.non_field_errors }}
 
-  {% if form.project %}
-    {% include "buggy/_formfield.html" with field=form.project %}
+  {% if form.category %}
+    {% include "buggy/_formfield.html" with field=form.category %}
   {% endif %}
   {% if form.title %}
     {% include "buggy/_formfield.html" with field=form.title %}

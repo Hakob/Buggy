@@ -15,13 +15,16 @@ from .enums import State, Priority
 from . import verhoeff
 
 
-class Project(models.Model):
+class Category(models.Model):
+    class Meta:
+        verbose_name_plural = "Categories"
+
     created_at = models.DateTimeField(default=timezone.now)
     name = models.CharField(max_length=100, unique=True)
     is_active = models.BooleanField(default=True)
 
     def get_absolute_url(self):
-        return '{}?projects={}'.format(urls.reverse('buggy:bug_list'), self.id)
+        return '{}?categories={}'.format(urls.reverse('buggy:bug_list'), self.id)
 
     def __str__(self):
         return self.name
@@ -42,7 +45,7 @@ class Bug(models.Model):
     title = models.CharField(max_length=100)
     state = EnumField(State, max_length=25)
     priority = EnumIntegerField(Priority)
-    project = models.ForeignKey(Project, on_delete=models.PROTECT)
+    category = models.ForeignKey(Category, on_delete=models.PROTECT)
     assigned_to = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.PROTECT,
@@ -72,7 +75,7 @@ class Bug(models.Model):
     def actions_preloaded(self):
         return self.actions.select_related(
             'user', 'comment', 'setpriority', 'setassignment__assigned_to',
-            'setstate', 'setproject', 'settitle',
+            'setstate', 'setcategory', 'settitle',
         ).prefetch_related('attachments')
 
 
@@ -127,7 +130,7 @@ class Action(models.Model):
 
     @classmethod
     @transaction.atomic
-    def build_bug(cls, user, title, project, priority, state):
+    def build_bug(cls, user, title, category, priority, state):
         bug = Bug(
             created_by=user,
         )
@@ -137,7 +140,7 @@ class Action(models.Model):
             order=0,
         )
         action.set_title(title)
-        action.set_project(project)
+        action.set_category(category)
         action.set_priority(priority)
         action.set_state(state)
         return action
@@ -157,8 +160,8 @@ class Action(models.Model):
         self.pending_operations.append(operation)
         return operation
 
-    def set_project(self, project):
-        operation = SetProject(project=project)
+    def set_category(self, category):
+        operation = SetCategory(category=category)
         self.pending_operations.append(operation)
         return operation
 
@@ -313,12 +316,12 @@ class SetPriority(Operation):
         self.action.bug.priority = self.priority
 
 
-class SetProject(Operation):
+class SetCategory(Operation):
     action = models.OneToOneField(Action, primary_key=True, on_delete=models.CASCADE)
-    project = models.ForeignKey(Project, on_delete=models.PROTECT)
+    category = models.ForeignKey(Category, on_delete=models.PROTECT)
 
     def apply(self):
-        self.action.bug.project = self.project
+        self.action.bug.category = self.category
 
 
 def attachment_upload_to(instance, filename):

@@ -254,7 +254,7 @@ class BuggyBugMutator(BugMutator):
             action = Action.build_bug(
                 user=self.user,
                 title=data['title'],
-                project=data['project'],
+                category=data['category'],
                 priority=data['priority'],
                 state=State.ENTRUSTED if data['assign_to'] else State.NEW,
             )

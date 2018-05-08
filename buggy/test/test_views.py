@@ -5,7 +5,7 @@ from django.urls import reverse
 from buggy.webhook import get_bugs_from_commit_message, process_commit, validate_signature
 from buggy.enums import State
 
-from .fixtures import bug, project, user
+from .fixtures import bug, category, user
 
 
 def test_get_bugs_from_commit_message():

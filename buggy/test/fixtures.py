@@ -2,7 +2,7 @@ import pytest
 
 from django.contrib.auth import get_user_model
 
-from buggy.models import Action, Project
+from buggy.models import Action, Category
 from buggy.enums import Priority, State
 
 User = get_user_model()
@@ -18,18 +18,18 @@ def user(db):
 
 
 @pytest.fixture()
-def project(db):
-    return Project.objects.create(
-        name='Project',
+def category(db):
+    return Category.objects.create(
+        name='Category',
     )
 
 
 @pytest.fixture()
-def bug(user, project):
+def bug(user, category):
     action = Action.build_bug(
         user=user,
         title='title',
-        project=project,
+        category=category,
         priority=Priority.URGENT,
         state=State.NEW,
     )

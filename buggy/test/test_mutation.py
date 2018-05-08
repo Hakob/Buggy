@@ -1,13 +1,13 @@
 from buggy.models import Action, Bug
 from buggy.enums import Priority, State
-from .fixtures import user, project, bug
+from .fixtures import user, category, bug
 
 
-def test_create_bug(user, project):
+def test_create_bug(user, category):
     action = Action.build_bug(
         user=user,
         title='title',
-        project=project,
+        category=category,
         priority=Priority.URGENT,
         state=State.NEW,
     )
@@ -16,7 +16,7 @@ def test_create_bug(user, project):
 
     bug = Bug.objects.get()
     assert bug.title == 'title'
-    assert bug.project == project
+    assert bug.category == category
     assert bug.priority == Priority.URGENT
     assert bug.state == State.NEW
     assert bug.created_by == user

@@ -17,11 +17,11 @@
   <h2>
     <div class="harvest-timer"
       data-item='{"id": {{ bug.number|json|force_escape }}, "name": {{ bug.title|json|force_escape }}}'
-      data-group='{"id": {{ bug.project.id|json|force_escape }}, "name": {{ bug.project.name|json|force_escape }}}'
+      data-group='{"id": {{ bug.category.id|json|force_escape }}, "name": {{ bug.category.name|json|force_escape }}}'
     ></div>
     <span class="bugNumber">#{{ bug.number }}</span> /
-    <a class="bugDetailProject" href="{{ bug.project.get_absolute_url }}">
-      {{ bug.project }}
+    <a class="bugDetailCategory" href="{{ bug.category.get_absolute_url }}">
+      {{ bug.category }}
     </a>
   </h2>
   <h1 class="bugMetadataTitle">

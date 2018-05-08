@@ -2,7 +2,7 @@ import pytest
 from django.contrib.auth import get_user_model
 
 from buggy.models import Bug, Comment
-from .fixtures import bug, user, project
+from .fixtures import bug, user, category
 
 User = get_user_model()
 
@@ -56,7 +56,7 @@ def test_bug_number_link(bug):
     comment = Comment(comment='bug #{}'.format(bug.number))
     assert comment.html == '<p>bug <a href="{}" title="{} - {}">#{}</a></p>'.format(
         bug.get_absolute_url(),
-        bug.project,
+        bug.category,
         bug.title,
         bug.number,
     )

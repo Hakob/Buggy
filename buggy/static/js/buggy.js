@@ -9,8 +9,8 @@ jQuery(function($) {
   }
   parseBuggyData();
 
-  $('select[name="projects"]').select2();
-  $('select[name="project"]').select2();
+  $('select[name="categories"]').select2();
+  $('select[name="category"]').select2();
 
   $('.actions .subActions').hide();
   $('.nestedAction .open').click(function() {

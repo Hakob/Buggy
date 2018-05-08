@@ -25,7 +25,7 @@ User = get_user_model()
 class BugListView(LoginRequiredMixin, ListView):
     ORDER_FIELDS = {
         'number': 'id',
-        'project': 'project__name',
+        'category': 'category__name',
         'bug': 'title',
         'modified': 'modified_at',
         'creator': 'created_by__name',
@@ -36,7 +36,7 @@ class BugListView(LoginRequiredMixin, ListView):
 
     mutator_class = BuggyBugMutator
     queryset = Bug.objects.select_related(
-        'project', 'created_by', 'assigned_to'
+        'category', 'created_by', 'assigned_to'
     ).order_by(
         '-modified_at'
     ).defer('fulltext')  # We don't use the column, so there's no need to detoast a long string.
@@ -201,7 +201,7 @@ class BugDetailView(BugMutationMixin, FormView):
     template_name = 'buggy/bug_detail.html'
 
     queryset = Bug.objects.select_related(
-        'created_by', 'assigned_to', 'project'
+        'created_by', 'assigned_to', 'category'
     )
 
     def get(self, request, *args, **kwargs):

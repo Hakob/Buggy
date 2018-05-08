@@ -1,10 +1,10 @@
 to: {{ to.email }}
-subject: "Buggy: [{{ bug.number }}] {{ action.user.get_short_name }} mentioned you in a bug. ({{ bug.project.name }})"
+subject: "Buggy: [{{ bug.number }}] {{ action.user.get_short_name }} mentioned you in a bug. ({{ bug.category.name }})"
 content-type: markdown
 ---
 {% load absoluteuri %}# On the bug: "{{ bug.title }}" (<{{ bug.get_absolute_url|absolutize }}>)
 
-## For project "{{ bug.project }}"
+## For category "{{ bug.category }}"
 
 ### {{ action.user.get_short_name }} {{ action.description }}
 {% if action.settitle and action.order != 0 %}
