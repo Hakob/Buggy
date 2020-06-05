@@ -2,7 +2,7 @@ Babel==2.4.0
 bleach==2.0.0
 dj-config-url==0.1.1
 dj-database-url==0.4.2
-Django==1.11.15
+Django==1.11.29
 django-absoluteuri==1.2.0
 django-appconf==1.0.2
 django-argonauts==1.2.0
